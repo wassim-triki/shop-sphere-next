@@ -1,7 +1,9 @@
+import Hero from "~/components/Hero";
+
 export default function HomePage() {
   return (
-    <main>
-      <h1>Main page</h1>
+    <main className='className="pb-6 lg:pb-12" sm:pb-8'>
+      <Hero />
     </main>
   );
 }

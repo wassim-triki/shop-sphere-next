@@ -3,16 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 import { ShoppingBag } from "lucide-react";
-type NavLink = {
-  name: string;
-  href: string;
-};
-const links: NavLink[] = [
-  { name: "Home", href: "/" },
-  { name: "Men", href: "/men" },
-  { name: "Women", href: "/women" },
-  { name: "Kids", href: "/kids" },
-];
+import { NavLink, navLinks } from "~/data";
+
 export default function Navbar() {
   const pathname = usePathname();
   return (
@@ -25,8 +17,8 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-12 lg:flex">
-          {links.map((link) => (
-            <NavLink key={link.name} link={link} />
+          {navLinks.map((navLink) => (
+            <NavLinkItem key={navLink.name} navLink={navLink} />
           ))}
         </nav>
 
@@ -44,17 +36,20 @@ export default function Navbar() {
   );
 }
 
-type NavLinkProps = {
-  link: NavLink;
+type NavLinkItemProps = {
+  navLink: NavLink;
 };
-function NavLink({ link }: NavLinkProps) {
+function NavLinkItem({ navLink }: NavLinkItemProps) {
   const pathname = usePathname();
-  const isActive = pathname === link.href;
+  const isActive = pathname === navLink.href;
   if (isActive)
     return (
       <div>
-        <Link className="text-lg font-semibold text-primary" href={link.href}>
-          {link.name}
+        <Link
+          className="text-lg font-semibold text-primary"
+          href={navLink.href}
+        >
+          {navLink.name}
         </Link>
       </div>
     );
@@ -62,9 +57,9 @@ function NavLink({ link }: NavLinkProps) {
     <div>
       <Link
         className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-primary"
-        href={link.href}
+        href={navLink.href}
       >
-        {link.name}
+        {navLink.name}
       </Link>
     </div>
   );
