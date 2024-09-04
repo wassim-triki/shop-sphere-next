@@ -1,10 +1,10 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { PackageIcon } from "@sanity/icons";
+import { TagIcon } from "@sanity/icons";
 
 export default defineType({
-  name: "product",
-  title: "Product",
-  icon: PackageIcon,
+  name: "category",
+  title: "Category",
+  icon: TagIcon,
   type: "document",
   fields: [
     defineField({
@@ -25,28 +25,9 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "price",
-      title: "Price",
-      type: "number",
-      validation: (rule) => rule.required() && rule.positive(),
-    }),
-    defineField({
       name: "description",
       title: "Description",
       type: "text",
-    }),
-    defineField({
-      name: "images",
-      title: "Images",
-      type: "array",
-      of: [defineArrayMember({ type: "image" })],
-    }),
-    defineField({
-      name: "category",
-      title: "Category",
-      type: "reference",
-      to: [{ type: "category" }],
-      validation: (rule) => rule.required(),
     }),
   ],
 });
