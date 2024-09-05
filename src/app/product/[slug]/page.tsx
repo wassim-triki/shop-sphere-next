@@ -39,9 +39,12 @@ type Props = {
 export default async function ProdcutPage({ params: { slug } }: Props) {
   const data = await getProductDetails(slug);
   const imageUrls: string[] = [];
-  for (const image of data?.images) {
-    image && imageUrls?.push(urlFor(image).url());
+  if (data?.images) {
+    for (const image of data?.images) {
+      image && imageUrls?.push(urlFor(image).url());
+    }
   }
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">

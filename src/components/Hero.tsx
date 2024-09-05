@@ -34,7 +34,7 @@ async function Hero() {
               className="h-full w-full object-cover object-center"
               alt="Hero Image"
               priority
-              src={urlFor(data[0]?.image1).url()}
+              src={urlFor(data[0]?.image1 ?? "").url()}
             />
           </div>
           <div className="overflow-hidden rounded-lg bg-gray-100 shadow-lg">
@@ -44,7 +44,7 @@ async function Hero() {
               className="h-full w-full object-cover object-center"
               alt="Hero Image"
               priority
-              src={urlFor(data[0]?.image2).url()}
+              src={urlFor(data[0]?.image2 ?? "").url()}
             />
           </div>
         </div>
