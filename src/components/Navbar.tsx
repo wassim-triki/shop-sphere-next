@@ -8,7 +8,7 @@ import { NavLink, navLinks } from "~/data";
 export default function Navbar() {
   const pathname = usePathname();
   return (
-    <header className="mb-8 border-b">
+    <header className="mb-4 border-b md:mb-8">
       <div className="mx-auto flex max-w-2xl items-center justify-between pl-4 sm:pl-6 lg:max-w-7xl">
         <Link href={"/"}>
           <h1 className="text-2xl font-bold md:text-4xl">

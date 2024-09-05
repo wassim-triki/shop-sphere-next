@@ -33,7 +33,7 @@ export default function ImageGallery({
   };
 
   return (
-    <div className="max-w-3xl px-4">
+    <div className="max-w-3xl">
       <div className="relative flex aspect-[3/3] w-full items-center justify-center overflow-hidden rounded-lg bg-gray-100">
         <div className="relative h-full w-full">
           <Image
