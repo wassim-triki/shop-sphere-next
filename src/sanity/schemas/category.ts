@@ -8,8 +8,8 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
+      name: "name",
+      title: "Name",
       type: "string",
       validation: (rule) => rule.required(),
     }),
@@ -18,7 +18,7 @@ export default defineType({
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "name",
         maxLength: 96,
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },

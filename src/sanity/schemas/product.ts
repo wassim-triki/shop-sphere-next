@@ -40,13 +40,48 @@ export default defineType({
       title: "Images",
       type: "array",
       of: [defineArrayMember({ type: "image" })],
+      validation: (rule) => rule.required(),
     }),
+
+    // Sale field with conditional validation for salePrice
+    defineField({
+      name: "sale",
+      title: "Sale",
+      type: "object",
+      fields: [
+        defineField({
+          name: "isActive",
+          title: "Is Active",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
+          name: "salePrice",
+          title: "Sale Price",
+          type: "number",
+          validation: (rule) =>
+            rule.custom((salePrice, { document }) => {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+              const isActive = (document?.sale as { isActive?: boolean })
+                ?.isActive;
+
+              // If isActive is true, salePrice must be provided
+              if (isActive && !salePrice) {
+                return "Sale price is required when the sale is active.";
+              }
+
+              // No issues if validation passes
+              return true;
+            }),
+        }),
+      ],
+    }),
+
     defineField({
       name: "category",
       title: "Category",
       type: "reference",
       to: [{ type: "category" }],
-      validation: (rule) => rule.required(),
     }),
   ],
 });

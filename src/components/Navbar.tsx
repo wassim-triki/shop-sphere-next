@@ -45,21 +45,18 @@ function NavLinkItem({ navLink }: NavLinkItemProps) {
   if (isActive)
     return (
       <div>
-        <Link
-          className="text-lg font-semibold text-primary"
-          href={navLink.href}
-        >
-          {navLink.name}
+        <Link className="font-semibold text-primary" href={navLink.href}>
+          {navLink.name.toUpperCase()}
         </Link>
       </div>
     );
   return (
     <div>
       <Link
-        className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-primary"
+        className="font-semibold text-gray-600 transition duration-100 hover:text-primary"
         href={navLink.href}
       >
-        {navLink.name}
+        {navLink.name.toUpperCase()}
       </Link>
     </div>
   );

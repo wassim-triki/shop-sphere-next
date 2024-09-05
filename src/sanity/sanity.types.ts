@@ -120,6 +120,10 @@ export type Product = {
     _type: "image";
     _key: string;
   }>;
+  sale?: {
+    isActive?: boolean;
+    salePrice?: number;
+  };
   category?: {
     _ref: string;
     _type: "reference";
@@ -134,7 +138,7 @@ export type Category = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
+  name?: string;
   slug?: Slug;
   description?: string;
 };
@@ -251,10 +255,27 @@ export type HERO_IMAGES_QUERYResult = Array<{
   };
 }>;
 
+// Source: ../components/Newest.tsx
+// Variable: NEWEST_PRODUCTS_QUERY
+// Query: *[_type == 'product']|order(_createdAt desc)[0...$count] {  _id,    price,    title,    sale,    "slug":slug.current,    "categoryName":category->name,    "thumbnailUrl":images[0].asset->url}
+export type NEWEST_PRODUCTS_QUERYResult = Array<{
+  _id: string;
+  price: number | null;
+  title: string | null;
+  sale: {
+    isActive?: boolean;
+    salePrice?: number;
+  } | null;
+  slug: string | null;
+  categoryName: string | null;
+  thumbnailUrl: string | null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'heroImages']": HERO_IMAGES_QUERYResult;
+    '*[_type == \'product\']|order(_createdAt desc)[0...$count] {\n  _id,\n    price,\n    title,\n    sale,\n    "slug":slug.current,\n    "categoryName":category->name,\n    "thumbnailUrl":images[0].asset->url\n}': NEWEST_PRODUCTS_QUERYResult;
   }
 }
