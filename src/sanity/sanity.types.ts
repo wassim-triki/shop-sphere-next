@@ -120,6 +120,11 @@ export type Product = {
     _type: "image";
     _key: string;
   }>;
+  dayShipping?: {
+    min?: number;
+    max?: number;
+  };
+  rating?: number;
   sale?: {
     isActive?: boolean;
     salePrice?: number;
@@ -271,11 +276,45 @@ export type NEWEST_PRODUCTS_QUERYResult = Array<{
   thumbnailUrl: string | null;
 }>;
 
+// Source: ../app/product/[slug]/page.tsx
+// Variable: PRODUCT_DETAILS_QUERY
+// Query: *[_type == 'product' && slug.current == $slug ][0]{  _id,  title,    images,    price,    title,    dayShipping,    rating,    sale,    description,    "slug":slug.current,    "categoryName":category->name}
+export type PRODUCT_DETAILS_QUERYResult = {
+  _id: string;
+  title: string | null;
+  images: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
+  price: number | null;
+  dayShipping: {
+    min?: number;
+    max?: number;
+  } | null;
+  rating: number | null;
+  sale: {
+    isActive?: boolean;
+    salePrice?: number;
+  } | null;
+  description: string | null;
+  slug: string | null;
+  categoryName: string | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'heroImages']": HERO_IMAGES_QUERYResult;
     '*[_type == \'product\']|order(_createdAt desc)[0...$count] {\n  _id,\n    price,\n    title,\n    sale,\n    "slug":slug.current,\n    "categoryName":category->name,\n    "thumbnailUrl":images[0].asset->url\n}': NEWEST_PRODUCTS_QUERYResult;
+    '*[_type == \'product\' && slug.current == $slug ][0]{\n  _id,\n  title,\n    images,\n    price,\n    title,\n    dayShipping,\n    rating,\n    sale,\n    description,\n    "slug":slug.current,\n    "categoryName":category->name\n}': PRODUCT_DETAILS_QUERYResult;
   }
 }

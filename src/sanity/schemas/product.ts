@@ -43,6 +43,36 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
 
+    defineField({
+      name: "dayShipping",
+      title: "Day Shipping",
+      type: "object",
+      fields: [
+        defineField({
+          name: "min",
+          title: "Min",
+          type: "number",
+          validation: (rule) => rule.required() && rule.positive(),
+        }),
+        defineField({
+          name: "max",
+          title: "Max",
+          type: "number",
+          validation: (rule) => rule.required() && rule.positive(),
+        }),
+      ],
+      initialValue: {
+        min: 2,
+        max: 4,
+      },
+    }),
+
+    defineField({
+      name: "rating",
+      title: "Rating",
+      type: "number",
+      validation: (rule) => rule.required() && rule.min(0) && rule.max(5),
+    }),
     // Sale field with conditional validation for salePrice
     defineField({
       name: "sale",
