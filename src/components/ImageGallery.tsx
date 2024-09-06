@@ -2,17 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Tag } from "lucide-react";
 import { Button } from "./ui/button";
 
 export default function ImageGallery({
-  images = [
-    "https://cdn.sanity.io/images/czbt6ut5/production/dbfe6b5885ddfe0432bb9e2979faa341ca271b81-1728x2160.webp",
-    "https://cdn.sanity.io/images/czbt6ut5/production/a8b96f1dbe484a43cf7aec56660e58e998ccd2fc-1728x2160.webp",
-    "https://cdn.sanity.io/images/czbt6ut5/production/a9445bdbbd4554fb8ba7ef90f0a41384cb31bdf6-1728x2160.jpg",
-  ],
+  images,
+  onSale,
 }: {
   images: string[];
+  onSale?: boolean;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -36,6 +34,14 @@ export default function ImageGallery({
     <div className="max-w-3xl">
       <div className="relative flex aspect-[3/3] w-full items-center justify-center overflow-hidden rounded-lg bg-gray-100">
         <div className="relative h-full w-full">
+          {onSale && (
+            <div className="absolute left-0 top-0 flex items-center justify-center">
+              <div className="uppesrcase relative z-10 flex items-center gap-1 rounded-xl rounded-br-none rounded-tl-none bg-primary px-3 py-1.5 text-sm text-white">
+                <span className="pt-0.5">SALE</span>
+              </div>
+            </div>
+          )}
+
           <Image
             src={images[currentIndex] ?? ""}
             alt={`Product image ${currentIndex + 1}`}

@@ -49,7 +49,7 @@ export default async function ProdcutPage({ params: { slug } }: Props) {
     <div className="bg-white">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
         <div className="grid gap-4 md:grid-cols-2">
-          <ImageGallery images={imageUrls} />
+          <ImageGallery images={imageUrls} onSale={data?.sale?.isActive} />
 
           <div className="flex flex-col gap-5 md:py-4">
             <div className="flex flex-col">
