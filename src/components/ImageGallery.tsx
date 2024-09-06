@@ -74,7 +74,7 @@ export default function ImageGallery({
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`flex-shrink-0 rounded-lg p-0.5 transition-all duration-200 ease-in-out focus:outline-none ${
+            className={`flex-shrink-0 rounded-sm p-0.5 transition-all duration-200 ease-in-out focus:outline-none ${
               index === currentIndex
                 ? "ring-2 ring-primary ring-offset-2"
                 : "hover:opacity-75"
