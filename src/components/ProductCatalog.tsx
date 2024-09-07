@@ -8,8 +8,7 @@ import { Product } from "~/types";
 import { Button } from "./ui/button";
 import { CATEGORY_MAPPING, DEFAULT_LIMIT } from "~/data";
 import { usePathname } from "next/navigation";
-import { getProducts } from "~/app/catalog/page";
-import { getProductsByCategory } from "~/app/[category]/page";
+import { getProducts, getProductsByCategory } from "~/actions";
 
 type Props = {
   title: string;

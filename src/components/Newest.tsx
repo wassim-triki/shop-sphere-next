@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCatalog from "./ProductCatalog";
-import { getProducts } from "~/app/catalog/page";
+import { getProducts } from "~/actions";
 
 async function Newest() {
   const data = await getProducts();
