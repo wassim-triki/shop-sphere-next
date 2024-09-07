@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ProductCard from "./ProductCard";
 import { Product } from "~/types";
 
@@ -8,8 +8,8 @@ type Props = {
 function ProductList({ products }: Props) {
   return (
     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-      {products.map((product) => (
-        <ProductCard key={product._id} product={product} />
+      {products.map((product, index) => (
+        <ProductCard key={product._id + index} product={product} />
       ))}
     </div>
   );

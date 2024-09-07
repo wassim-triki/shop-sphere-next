@@ -26,7 +26,7 @@ function ProductCard({ product }: ProductCardProps) {
       <div className="mt-4">
         <div className="flex items-center justify-between gap-2">
           <h3 className="truncate text-gray-700">
-            <Link href={`/product/${product.slug}`}>{product.title}</Link>
+            <Link href={`/catalog/${product.slug}`}>{product.title}</Link>
           </h3>
           <p className="font-semibold text-primary">
             ${product.sale?.salePrice ?? product.price}

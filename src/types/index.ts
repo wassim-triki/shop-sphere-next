@@ -6,6 +6,7 @@ export type Product = {
   slug: string;
   categoryName: string;
   thumbnailUrl: string;
+  _createdAt: string;
 };
 
 export type ProductDetail = {

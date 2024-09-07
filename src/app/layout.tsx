@@ -1,6 +1,5 @@
 import "~/styles/globals.css";
 import { Josefin_Sans } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import Navbar from "~/components/Navbar";
 
