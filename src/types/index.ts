@@ -1,3 +1,5 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
 export type Product = {
   _id: string;
   price: number;
@@ -20,4 +22,9 @@ export type ProductDetail = {
   description?: string;
   slug: string;
   categoryName: string;
+};
+
+export type HeroImages = {
+  image1: SanityImageSource;
+  image2: SanityImageSource;
 };

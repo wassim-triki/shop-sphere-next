@@ -5,14 +5,16 @@ import { defineQuery } from "next-sanity";
 import { urlFor } from "~/sanity/lib/image";
 import Link from "next/link";
 import { navLinks } from "~/data";
+import { HeroImages } from "~/types";
 async function getHeroImages() {
-  const HERO_IMAGES_QUERY = defineQuery(`*[_type == 'heroImages']`);
-  const data = await client.fetch(HERO_IMAGES_QUERY);
+  const HERO_IMAGES_QUERY = defineQuery(`*[_type == 'heroImages'][0]`);
+  const data = await client.fetch<HeroImages>(HERO_IMAGES_QUERY);
   return data;
 }
 
 async function Hero() {
   const data = await getHeroImages();
+  console.log(data);
   return (
     <section className="mx-auto mt-8 max-w-2xl px-4 sm:pb-6 lg:max-w-7xl lg:px-8">
       <div className="bg-grseen-500 mb-8 flex flex-wrap justify-between md:mb-16">
@@ -34,7 +36,7 @@ async function Hero() {
               className="h-full w-full object-cover object-center"
               alt="Hero Image"
               priority
-              src={urlFor(data[0]?.image1 ?? "").url()}
+              src={urlFor(data.image1).url()}
             />
           </div>
           <div className="overflow-hidden rounded-lg bg-gray-100 shadow-lg">
@@ -44,7 +46,7 @@ async function Hero() {
               className="h-full w-full object-cover object-center"
               alt="Hero Image"
               priority
-              src={urlFor(data[0]?.image2 ?? "").url()}
+              src={urlFor(data.image2).url()}
             />
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { defineQuery } from "groq";
 import { Minus, Plus, Star, Truck } from "lucide-react";
 import React from "react";
+import { getProductDetails } from "~/actions";
 import ImageGallery from "~/components/ImageGallery";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -11,27 +12,6 @@ import { client } from "~/sanity/lib/client";
 import { urlFor } from "~/sanity/lib/image";
 import product from "~/sanity/schemas/product";
 import { ProductDetail } from "~/types";
-
-async function getProductDetails(slug: string) {
-  const PRODUCT_DETAILS_QUERY =
-    defineQuery(`*[_type == 'product' && slug.current == $slug ][0]{
-  _id,
-  title,
-  "images": images[].asset->url,
-  price,
-  dayShipping,
-  rating,
-  sale,
-  description,
-  "slug": slug.current,
-  "categoryName": category->name
-}
-`);
-  const data = await client.fetch<ProductDetail>(PRODUCT_DETAILS_QUERY, {
-    slug,
-  });
-  return data;
-}
 
 type Props = {
   params: {
