@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import { Josefin_Sans } from "next/font/google";
 import { type Metadata } from "next";
 import Navbar from "~/components/Navbar";
+import CartProvider from "~/providers/cart";
 
 // Import Josefin Sans
 const josefinSans = Josefin_Sans({
@@ -22,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${josefinSans.variable}`}>
       <body>
-        <Navbar />
-        {children}
+        <CartProvider>
+          <Navbar />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
