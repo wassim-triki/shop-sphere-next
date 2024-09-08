@@ -4,9 +4,10 @@ import { usePathname } from "next/navigation";
 import { Button } from "./ui/button";
 import { ShoppingBag } from "lucide-react";
 import { NavLink, navLinks } from "~/data";
+import { useShoppingCart } from "use-shopping-cart";
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const { handleCartClick } = useShoppingCart();
   return (
     <header className="mb-4 border-b md:mb-8">
       <div className="mx-auto flex max-w-2xl items-center justify-between pl-4 sm:pl-6 lg:max-w-7xl">
@@ -24,6 +25,7 @@ export default function Navbar() {
 
         <div className="flex">
           <Button
+            onClick={() => handleCartClick()}
             variant={"outline"}
             className="flex h-14 w-14 flex-col gap-y-1.5 rounded-none border-b-0 text-muted-foreground sm:h-20 sm:w-20 md:h-24 md:w-24"
           >

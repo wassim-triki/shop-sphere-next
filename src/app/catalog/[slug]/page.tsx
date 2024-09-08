@@ -2,6 +2,7 @@ import { defineQuery } from "groq";
 import { Minus, Plus, Star, Truck } from "lucide-react";
 import React from "react";
 import { getProductDetails } from "~/actions";
+import AddToCartButtons from "~/components/AddToCartButtons";
 import ImageGallery from "~/components/ImageGallery";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -21,7 +22,16 @@ type Props = {
 
 export default async function ProdcutPage({ params: { slug } }: Props) {
   const data = await getProductDetails(slug);
-
+  const cartProduct = {
+    name: data.name,
+    description: data.description,
+    price: data.price,
+    currency: "USD",
+    image: data.images[0]!,
+    product_data: {
+      categoryName: data.categoryName,
+    },
+  };
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-screen-xl px-4 md:px-8">
@@ -31,7 +41,7 @@ export default async function ProdcutPage({ params: { slug } }: Props) {
           <div className="flex flex-col gap-5 md:py-4">
             <div className="flex flex-col">
               <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
-                {data.title}
+                {data.name}
               </h2>
               <span className="inline-block text-gray-500">
                 {data.categoryName}
@@ -68,12 +78,7 @@ export default async function ProdcutPage({ params: { slug } }: Props) {
             </div>
 
             <Separator />
-
-            <div className="flex items-center gap-2">
-              <QuantitySelector />
-              <Button>Add to cart</Button>
-              <Button variant={"secondary"}>Check out now</Button>
-            </div>
+            <AddToCartButtons cartProduct={cartProduct} />
             <Separator />
             <div className="text-muted-foreground">{data?.description}</div>
           </div>

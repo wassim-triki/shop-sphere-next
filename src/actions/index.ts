@@ -10,7 +10,7 @@ export async function getProducts(lastCreatedAt = "") {
   }] | order(_createdAt asc)[0...$limit] {
     _id,
     price,
-    title,
+    name,
     sale,
     "slug": slug.current,
     "categoryName": category->name,
@@ -36,7 +36,7 @@ export async function getProductsByCategory(
     | order(_createdAt asc)[0...$limit] {
       _id,
       price,
-      title,
+      name,
       sale,
       "slug": slug.current,
       "categoryName": category->name,
@@ -70,7 +70,7 @@ export async function getProductDetails(slug: string) {
   const PRODUCT_DETAILS_QUERY =
     defineQuery(`*[_type == 'product' && slug.current == $slug ][0]{
   _id,
-  title,
+  name,
   "images": images[].asset->url,
   price,
   dayShipping,

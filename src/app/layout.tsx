@@ -3,12 +3,12 @@ import { Josefin_Sans } from "next/font/google";
 import { type Metadata } from "next";
 import Navbar from "~/components/Navbar";
 import CartProvider from "~/providers/cart";
+import CartSheet from "~/components/CartSheet";
 
 // Import Josefin Sans
 const josefinSans = Josefin_Sans({
   subsets: ["latin"], // You can specify other subsets if needed
   variable: "--font-josefin-sans",
-  weight: ["400", "700"], // Specify the weights you need
 });
 
 export const metadata: Metadata = {
@@ -24,6 +24,7 @@ export default function RootLayout({
     <html lang="en" className={`${josefinSans.variable}`}>
       <body>
         <CartProvider>
+          <CartSheet />
           <Navbar />
           {children}
         </CartProvider>

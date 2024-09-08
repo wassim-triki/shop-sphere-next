@@ -9,20 +9,20 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// Create query string dynamically
-export const createQueryString = (
-  searchParams: URLSearchParams,
-  params: Record<string, string | number | null>,
-) => {
-  const newSearchParams = new URLSearchParams(searchParams?.toString());
-
-  for (const [key, value] of Object.entries(params)) {
-    if (value === null) {
-      newSearchParams.delete(key);
-    } else {
-      newSearchParams.set(key, String(value));
-    }
-  }
-
-  return newSearchParams.toString();
-};
+export function formatCurrency({
+  amount,
+  currency,
+  locale,
+}: {
+  amount: number;
+  currency: string;
+  locale: string;
+}): string {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
+    currencyDisplay: "symbol",
+  }).format(amount);
+}

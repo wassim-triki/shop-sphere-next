@@ -1,46 +1,42 @@
 "use client";
 
-import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "./button";
+import { useEffect } from "react";
 
 interface QuantitySelectorProps {
-  initialQuantity?: number;
+  quantity: number; // Now, the quantity is fully controlled by the parent
   minQuantity?: number;
   maxQuantity?: number;
-  onChange?: (quantity: number) => void;
+  onAdd?: (newQuantity: number) => void;
+  onRemove?: (newQuantity: number) => void;
+  onChange?: (newQuantity: number) => void;
 }
 
-export default function Component({
-  initialQuantity = 1,
+export default function QuantitySelector({
+  quantity,
   minQuantity = 1,
   maxQuantity = 100,
+  onAdd,
+  onRemove,
   onChange,
-}: QuantitySelectorProps = {}) {
-  const [quantity, setQuantity] = useState(initialQuantity);
-
+}: QuantitySelectorProps) {
   const handleIncrement = () => {
     if (quantity < maxQuantity) {
-      setQuantity((prev) => {
-        const newQuantity = prev + 1;
-        onChange?.(newQuantity);
-        return newQuantity;
-      });
+      onAdd?.(quantity + 1); // Notify parent component to update
+      onChange?.(quantity + 1);
     }
   };
 
   const handleDecrement = () => {
     if (quantity > minQuantity) {
-      setQuantity((prev) => {
-        const newQuantity = prev - 1;
-        onChange?.(newQuantity);
-        return newQuantity;
-      });
+      onRemove?.(quantity - 1); // Notify parent component to update
+      onChange?.(quantity - 1);
     }
   };
 
   return (
-    <div className="flex w-fit items-center overflow-hidden rounded-md border border-gray-300">
+    <div className="flex w-24 items-center overflow-hidden rounded-md border border-gray-300">
       <Button
         variant="ghost"
         size="icon"
