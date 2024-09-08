@@ -10,7 +10,6 @@ import { Product } from "~/types";
 
 async function CatalogPage() {
   const data = await getProducts();
-  const data = await getProducts();
   const total = await getProductsCount();
 
   return (
