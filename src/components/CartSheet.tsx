@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import QuantitySelector from "./ui/quantity-selector";
-import { Trash, Trash2 } from "lucide-react";
+import { RotateCw, Trash, Trash2 } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { formatCurrency } from "~/lib/utils";
 import { CartEntry } from "use-shopping-cart/core";
@@ -76,8 +76,18 @@ type SheetFooterProps = {
 
 function SheetFooter({ total }: SheetFooterProps) {
   const [formattedSubtotal, setFormattedSubtotal] = useState(total?.toString());
-  const { handleCartClick } = useShoppingCart();
-
+  const { handleCartClick, redirectToCheckout } = useShoppingCart();
+  const [loading, setLoading] = useState(false);
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      await redirectToCheckout();
+    } catch (error) {
+      console.error("Error redirecting to checkout:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     if (total) {
       setFormattedSubtotal(
@@ -109,8 +119,19 @@ function SheetFooter({ total }: SheetFooterProps) {
       </div>
 
       <div className="mb-7 flex flex-col gap-3 sm:gap-5">
-        <Button size={"lg"} className="w-full text-base">
-          Checkout
+        <Button
+          onClick={handleCheckout}
+          disabled={loading}
+          size={"lg"}
+          className="flex w-full items-center gap-1 text-base"
+        >
+          {loading ? (
+            <>
+              <RotateCw className="h-4 w-4 animate-spin" /> Redirecting...
+            </>
+          ) : (
+            "Checkout"
+          )}
         </Button>
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
