@@ -26,7 +26,7 @@ function AddToCartButtons({ cartProduct }: Props) {
       <Button
         onClick={() => {
           addItem(
-            { ...cartProduct, id: cartProduct.name },
+            { ...cartProduct, id: cartProduct.price_id },
             {
               count: count,
             },
@@ -36,7 +36,7 @@ function AddToCartButtons({ cartProduct }: Props) {
       >
         Add to cart
       </Button>
-      <Button variant={"secondary"}>Check out now</Button>
+      {/* <Button variant={"secondary"}>Check out now</Button> */}
     </div>
   );
 }

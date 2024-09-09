@@ -39,7 +39,7 @@ export default function CartSheet() {
       <SheetContent className="w-full sm:max-w-lg">
         <SheetHeader>
           <SheetTitle>
-            Shopping Cart{" "}
+            <span className="font-bold">Shopping Cart</span>{" "}
             {cartCount && cartCount > 0 ? (
               <span className="text-muted-foreground">
                 ({Object.values(cartDetails ?? {}).length})

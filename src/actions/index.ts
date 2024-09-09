@@ -76,6 +76,7 @@ export async function getProductDetails(slug: string) {
   dayShipping,
   rating,
   sale,
+  price_id,
   description,
   "slug": slug.current,
   "categoryName": category->name
