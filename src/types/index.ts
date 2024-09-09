@@ -22,6 +22,7 @@ export type ProductDetail = {
   description: string;
   slug: string;
   categoryName: string;
+  price_id: string;
 };
 
 export type HeroImages = {
@@ -38,4 +39,5 @@ export type CartProduct = {
   product_data: {
     categoryName: string;
   };
+  price_id: string;
 };

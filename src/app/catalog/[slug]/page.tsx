@@ -28,6 +28,7 @@ export default async function ProdcutPage({ params: { slug } }: Props) {
     price: data.price,
     currency: "USD",
     image: data.images[0]!,
+    price_id: data.price_id,
     product_data: {
       categoryName: data.categoryName,
     },

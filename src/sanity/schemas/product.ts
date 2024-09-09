@@ -113,5 +113,11 @@ export default defineType({
       type: "reference",
       to: [{ type: "category" }],
     }),
+
+    defineField({
+      name: "price_id",
+      title: "Stripe Price ID",
+      type: "string",
+    }),
   ],
 });
