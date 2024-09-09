@@ -17,6 +17,7 @@ import QuantitySelector from "./ui/quantity-selector";
 import { Trash, Trash2 } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { formatCurrency } from "~/lib/utils";
+import { CartEntry } from "use-shopping-cart/core";
 
 export default function CartSheet() {
   const {
@@ -24,9 +25,6 @@ export default function CartSheet() {
     shouldDisplayCart,
     handleCartClick,
     cartDetails,
-    addItem,
-    removeItem,
-    decrementItem,
     totalPrice,
   } = useShoppingCart();
 
@@ -60,62 +58,7 @@ export default function CartSheet() {
             ) : (
               <ul className="-my-4 divide-y divide-gray-200">
                 {Object.values(cartDetails ?? {}).map((cartItem) => (
-                  <li key={cartItem.id} className="flex flex-col gap-2 py-4">
-                    <div className="flex w-full">
-                      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                        <Image
-                          src={cartItem.image!}
-                          alt={cartItem.name}
-                          width={100}
-                          height={100}
-                          objectFit="cover"
-                          objectPosition="center"
-                        />
-                      </div>
-                      <div className="ml-4 flex flex-1 flex-col">
-                        <div className="flex justify-between gap-2">
-                          <span className="text-sm font-normal text-muted-foreground">
-                            {
-                              (
-                                cartItem?.product_data as {
-                                  categoryName: string;
-                                }
-                              )?.categoryName
-                            }
-                          </span>
-                          <p className="ml-4 font-semibold text-primary">
-                            ${cartItem.price}
-                          </p>
-                        </div>
-                        <div className="flex flex-col">
-                          <h4 className="sm:text-lg">{cartItem.name}</h4>
-                          <p className="mt-2 line-clamp-1 text-sm text-muted-foreground sm:line-clamp-2">
-                            {cartItem.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <QuantitySelector
-                        quantity={cartItem.quantity}
-                        onAdd={() =>
-                          addItem(cartItem, {
-                            count: 1,
-                          })
-                        }
-                        onRemove={() =>
-                          decrementItem(cartItem.id, { count: 1 })
-                        }
-                      />
-                      <Button
-                        className="rounded-md border-[1px] border-destructive bg-white text-destructive hover:bg-destructive hover:text-white"
-                        size={"icon"}
-                        onClick={() => removeItem(cartItem.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </li>
+                  <CartItem key={cartItem.id} cartItem={cartItem} />
                 ))}
               </ul>
             )}
@@ -187,5 +130,66 @@ function SheetFooter({ total }: SheetFooterProps) {
         </Button>
       </div>
     </div>
+  );
+}
+
+type CartItemProps = {
+  cartItem: CartEntry;
+};
+function CartItem({ cartItem }: CartItemProps) {
+  const { addItem, removeItem, decrementItem } = useShoppingCart();
+  return (
+    <li key={cartItem.id} className="flex flex-col gap-2 py-4">
+      <div className="flex w-full">
+        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+          <Image
+            src={cartItem.image!}
+            alt={cartItem.name}
+            width={100}
+            height={100}
+            objectFit="cover"
+            objectPosition="center"
+          />
+        </div>
+        <div className="ml-4 flex flex-1 flex-col">
+          <div className="flex justify-between gap-2">
+            <span className="text-sm font-normal text-muted-foreground">
+              {
+                (
+                  cartItem?.product_data as {
+                    categoryName: string;
+                  }
+                )?.categoryName
+              }
+            </span>
+            <p className="ml-4 font-semibold text-primary">${cartItem.price}</p>
+          </div>
+          <div className="flex flex-col">
+            <h4 className="sm:text-lg">{cartItem.name}</h4>
+            <p className="mt-2 line-clamp-1 text-sm text-muted-foreground sm:line-clamp-2">
+              {cartItem.description}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center justify-between">
+        <QuantitySelector
+          quantity={cartItem.quantity}
+          onAdd={() =>
+            addItem(cartItem, {
+              count: 1,
+            })
+          }
+          onRemove={() => decrementItem(cartItem.id, { count: 1 })}
+        />
+        <Button
+          className="rounded-md border-[1px] border-destructive bg-white text-destructive hover:bg-destructive hover:text-white"
+          size={"icon"}
+          onClick={() => removeItem(cartItem.id)}
+        >
+          <Trash2 className="h-4 w-4" />
+        </Button>
+      </div>
+    </li>
   );
 }
