@@ -1,7 +1,7 @@
 import { defineQuery } from "groq";
 import { DEFAULT_LIMIT } from "~/data";
 import { client } from "~/sanity/lib/client";
-import { Product, ProductDetail } from "~/types";
+import { HeroImages, Product, ProductDetail } from "~/types";
 
 // Fetch products, paginated by _createdAt
 export async function getProducts(lastCreatedAt = "") {
@@ -85,5 +85,11 @@ export async function getProductDetails(slug: string) {
   const data = await client.fetch<ProductDetail>(PRODUCT_DETAILS_QUERY, {
     slug,
   });
+  return data;
+}
+
+export async function getHeroImages() {
+  const HERO_IMAGES_QUERY = defineQuery(`*[_type == 'heroImages'][0]`);
+  const data = await client.fetch<HeroImages>(HERO_IMAGES_QUERY);
   return data;
 }

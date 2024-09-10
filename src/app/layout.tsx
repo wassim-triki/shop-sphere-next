@@ -4,6 +4,10 @@ import { type Metadata } from "next";
 import Navbar from "~/components/Navbar";
 import CartProvider from "~/providers/cart";
 import CartSheet from "~/components/CartSheet";
+import { Button } from "~/components/ui/button";
+import Link from "next/link";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import AdBanner from "~/components/AdBanner";
 
 // Import Josefin Sans
 const josefinSans = Josefin_Sans({
@@ -27,6 +31,7 @@ export default function RootLayout({
           <CartSheet />
           <Navbar />
           {children}
+          <AdBanner />
         </CartProvider>
       </body>
     </html>

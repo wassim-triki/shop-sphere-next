@@ -5,12 +5,7 @@ import { defineQuery } from "next-sanity";
 import { urlFor } from "~/sanity/lib/image";
 import Link from "next/link";
 import { navLinks } from "~/data";
-import { HeroImages } from "~/types";
-async function getHeroImages() {
-  const HERO_IMAGES_QUERY = defineQuery(`*[_type == 'heroImages'][0]`);
-  const data = await client.fetch<HeroImages>(HERO_IMAGES_QUERY);
-  return data;
-}
+import { getHeroImages } from "~/actions";
 
 async function Hero() {
   const data = await getHeroImages();
