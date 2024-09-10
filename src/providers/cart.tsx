@@ -11,7 +11,7 @@ function CartProvider({ children }: { children: React.ReactNode }) {
       successUrl={`${config.baseURL}/stripe/success`}
       cancelUrl={`${config.baseURL}/stripe/error`}
       currency="usd"
-      billingAddressCollection={true}
+      billingAddressCollection={false}
       shouldPersist={true}
       language="en-US"
     >
