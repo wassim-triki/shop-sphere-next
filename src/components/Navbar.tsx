@@ -5,16 +5,20 @@ import { Button } from "./ui/button";
 import { ShoppingBag } from "lucide-react";
 import { NavLink, navLinks } from "~/data";
 import { useShoppingCart } from "use-shopping-cart";
+import Image from "next/image";
 
 export default function Navbar() {
   const { handleCartClick, cartCount } = useShoppingCart();
   return (
     <header className="mb-4 border-b md:mb-8">
       <div className="mx-auto flex max-w-2xl items-center justify-between pl-4 sm:pl-6 lg:max-w-7xl">
-        <Link href={"/"}>
-          <h1 className="text-2xl font-bold md:text-4xl">
-            Shop<span className="text-primary">Sphere</span>
-          </h1>
+        <Link href={"/"} className="flex items-center gap-3">
+          <Image alt="favicon" width={40} height={40} src={"/favicon.ico"} />
+          <div className="mt-3">
+            <h1 className="text-2xl font-bold md:text-4xl">
+              Shop<span className="text-primary">Sphere</span>
+            </h1>
+          </div>
         </Link>
 
         <nav className="hidden items-center gap-12 lg:flex">
