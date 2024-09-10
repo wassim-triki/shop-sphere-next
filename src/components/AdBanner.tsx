@@ -6,8 +6,8 @@ import Image from "next/image";
 
 async function AdBanner() {
   return (
-    <section>
-      <div className="mx-auto max-w-2xl p-4 sm:px-6 lg:max-w-7xl lg:px-8">
+    <section className="">
+      <div className="mx-auto max-w-2xl p-4 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="mx-auto grid grid-cols-1 overflow-hidden rounded-md bg-gray-800 text-white sm:grid-cols-5">
           <div className="h-full overflow-hidden sm:col-span-2">
             <Image

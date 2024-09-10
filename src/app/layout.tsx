@@ -8,6 +8,7 @@ import { Button } from "~/components/ui/button";
 import Link from "next/link";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import AdBanner from "~/components/AdBanner";
+import Footer from "~/components/Footer";
 
 // Import Josefin Sans
 const josefinSans = Josefin_Sans({
@@ -32,6 +33,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <AdBanner />
+          <Footer />
         </CartProvider>
       </body>
     </html>
